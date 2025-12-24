@@ -24,4 +24,8 @@ pub enum Command {
         #[arg(short = 'y', long = "y", default_value = "0")]
         y: i32,
     },
+    Ocr {
+        #[arg(long = "image-path", default_value = "target/screenshot.png")]
+        image_path: String,
+    },
 }

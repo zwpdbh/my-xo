@@ -35,5 +35,6 @@ fn main() {
                 Err(e) => error!("Error taking screenshot: {:?}", e),
             }
         }
+        Command::Ocr { image_path } => run_ocr(&image_path).unwrap(),
     }
 }

@@ -28,7 +28,7 @@ pub fn capture_screenshot(config: ScreenshotConfig) -> Result<PathBuf> {
     let start = Instant::now();
     let screen = Screen::all().unwrap()[0];
 
-    let capture_path = PathBuf::from("target/screenshot_with_area.png");
+    let capture_path = PathBuf::from("target/screenshot.png");
     let captured_screenshot = capture_screen(&screen, &config)?;
     captured_screenshot.save(&capture_path).unwrap();
 

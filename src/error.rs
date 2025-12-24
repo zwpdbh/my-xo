@@ -1,4 +1,3 @@
-use image;
 use std::io;
 
 pub type Result<T> = core::result::Result<T, Error>;
@@ -7,7 +6,7 @@ pub type Result<T> = core::result::Result<T, Error>;
 pub enum Error {
     ScreenshotError(String),
     IoError(io::Error),
-    ImageError(image::ImageError),
+    ImageError(String),
     PlatformNotSupported,
 }
 
@@ -22,11 +21,5 @@ impl std::error::Error for Error {}
 impl From<io::Error> for Error {
     fn from(err: io::Error) -> Self {
         Error::IoError(err)
-    }
-}
-
-impl From<image::ImageError> for Error {
-    fn from(err: image::ImageError) -> Self {
-        Error::ImageError(err)
     }
 }
