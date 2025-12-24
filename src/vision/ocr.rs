@@ -15,10 +15,7 @@ pub fn run_ocr(image_path: &str) -> Result<()> {
 
     let my_args = Args {
         lang: "eng".to_string(),
-        config_variables: HashMap::from([(
-            "tessedit_char_whitelist".into(),
-            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".into(),
-        )]),
+        config_variables: HashMap::from([("tessedit_char_whitelist".into(), "0123456789".into())]),
         dpi: Some(150),
         psm: Some(6),
         oem: Some(3),
