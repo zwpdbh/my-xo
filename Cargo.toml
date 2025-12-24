@@ -1,0 +1,11 @@
+[package]
+name = "my-xo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.53", features = ["derive"] }
+scap = "0.0.8"
+image = "0.25.5"
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["json"] }
