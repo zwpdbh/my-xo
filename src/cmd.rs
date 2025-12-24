@@ -11,19 +11,19 @@ pub struct Args {
 pub enum Command {
     Screenshot {
         /// Width of the screenshot area (default: 400)
-        #[arg(short = 'w', long = "width", default_value = "400")]
+        #[arg(long = "width", default_value = "400")]
         width: u32,
 
         /// Height of the screenshot area (default: 300)
-        #[arg(short = 'h', long = "height", default_value = "300")]
+        #[arg(long = "height", default_value = "300")]
         height: u32,
 
         /// X coordinate of the top-left corner (default: 0)
         #[arg(short = 'x', long = "x", default_value = "0")]
-        x: u32,
+        x: i32,
 
         /// Y coordinate of the top-left corner (default: 0)
         #[arg(short = 'y', long = "y", default_value = "0")]
-        y: u32,
+        y: i32,
     },
 }
