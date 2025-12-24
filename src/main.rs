@@ -9,7 +9,8 @@ mod tracer;
 use tracer::setup_simple_tracing;
 
 mod vision;
-use vision::screenshot::{ScreenshotConfig, capture_screenshot};
+use tracing::{error, info};
+use vision::*;
 
 fn main() {
     setup_simple_tracing();
@@ -30,8 +31,8 @@ fn main() {
             };
 
             match capture_screenshot(config) {
-                Ok(path) => println!("Screenshot successfully saved to: {}", path.display()),
-                Err(e) => eprintln!("Error taking screenshot: {:?}", e),
+                Ok(path) => info!("Screenshot successfully saved to: {}", path.display()),
+                Err(e) => error!("Error taking screenshot: {:?}", e),
             }
         }
     }

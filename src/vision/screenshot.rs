@@ -1,7 +1,10 @@
 use crate::error::Result;
+
 use screenshots::Screen;
+use screenshots::image::{ImageBuffer, Rgba};
 use std::path::PathBuf;
 use std::time::Instant;
+use tracing::info;
 
 pub struct ScreenshotConfig {
     pub width: u32,
@@ -10,45 +13,25 @@ pub struct ScreenshotConfig {
     pub y: i32,
 }
 
-impl Default for ScreenshotConfig {
-    fn default() -> Self {
-        Self {
-            width: 400,
-            height: 300,
-            x: 0,
-            y: 0,
-        }
-    }
+pub fn capture_screen(
+    screen: &Screen,
+    config: &ScreenshotConfig,
+) -> Result<ImageBuffer<Rgba<u8>, Vec<u8>>> {
+    let image = screen
+        .capture_area(config.x, config.y, config.width, config.height)
+        .unwrap();
+
+    Ok(image)
 }
 
 pub fn capture_screenshot(config: ScreenshotConfig) -> Result<PathBuf> {
     let start = Instant::now();
-    let screens = Screen::all().unwrap();
+    let screen = Screen::all().unwrap()[0];
 
-    let capture_path = PathBuf::from("target/capture_display_with_point.png");
+    let capture_path = PathBuf::from("target/screenshot_with_area.png");
+    let captured_screenshot = capture_screen(&screen, &config)?;
+    captured_screenshot.save(&capture_path).unwrap();
 
-    for screen in screens {
-        println!("capturer {screen:?}");
-        let mut image = screen.capture().unwrap();
-
-        image
-            .save(format!("target/{}.png", screen.display_info.id))
-            .unwrap();
-
-        image = screen
-            .capture_area(config.x, config.y, config.width, config.height)
-            .unwrap();
-        image
-            .save(format!("target/{}-2.png", screen.display_info.id))
-            .unwrap();
-    }
-
-    let screen = Screen::from_point(100, 100).unwrap();
-    println!("capturer {screen:?}");
-
-    let image = screen.capture_area(300, 300, 300, 300).unwrap();
-    image.save(&capture_path).unwrap();
-    println!("运行耗时: {:?}", start.elapsed());
-
+    info!("elapsed time: {:?}", start.elapsed());
     Ok(capture_path)
 }

@@ -10,12 +10,10 @@ pub struct Args {
 #[derive(Subcommand, Debug, Clone)]
 pub enum Command {
     Screenshot {
-        /// Width of the screenshot area (default: 400)
-        #[arg(long = "width", default_value = "400")]
+        #[arg(long = "width", default_value = "500")]
         width: u32,
 
-        /// Height of the screenshot area (default: 300)
-        #[arg(long = "height", default_value = "300")]
+        #[arg(long = "height", default_value = "800")]
         height: u32,
 
         /// X coordinate of the top-left corner (default: 0)

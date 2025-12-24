@@ -1,1 +1,3 @@
-pub mod screenshot;
+mod screenshot;
+
+pub use screenshot::*;
